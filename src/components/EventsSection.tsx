@@ -8,19 +8,12 @@ type Event = {
   category: string | null;
   venue: string | null;
   start_date: string | null;
-  is_booking_enabled: boolean;
-  ticket_price: number | null;
-  currency: string;
+  status: "upcoming" | "ongoing" | "completed" | "cancelled";
+  poster_path: string | null;
 };
 
-function formatDate(iso: string | null) {
-  if (!iso) return "";
-  const date = new Date(iso);
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+function imageUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${path}`;
 }
 
 export default async function EventsSection() {
@@ -28,71 +21,65 @@ export default async function EventsSection() {
     "/events?status=upcoming&order=asc&limit=3"
   );
 
-  if (events.length === 0) {
-    return null;
-  }
+  if (events.length === 0) return null;
 
   return (
-    <section className="bg-baobab-dark px-6 py-20 md:px-12">
+    <section className="bg-white px-6 py-20 md:px-12">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex items-end justify-between">
+        <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-gold">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-clay">
               Get Involved
             </p>
-            <h2 className="font-display text-3xl text-sand md:text-4xl">
+            <h2 className="mt-2 font-display text-3xl text-ink md:text-4xl">
               Upcoming Events
             </h2>
           </div>
           <Link
             href="/events"
-            className="hidden font-body text-sm text-sand/70 underline underline-offset-4 hover:text-gold md:block"
+            className="font-body text-sm text-baobab underline"
           >
             View all events
           </Link>
         </div>
 
-        <div className="divide-y divide-sand/10">
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
           {events.map((event) => (
             <Link
               key={event.id}
               href={`/events/${event.slug}`}
-              className="group flex flex-col items-start justify-between gap-3 py-6 md:flex-row md:items-center"
+              className="group flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-sand transition-shadow hover:shadow-lg"
             >
-              <div>
-                {event.category && (
-                  <p className="mb-1 font-mono text-xs uppercase tracking-[0.15em] text-gold/80">
-                    {event.category}
-                  </p>
+              <div className="aspect-video w-full overflow-hidden bg-ink/5">
+                {event.poster_path ? (
+                  <img
+                    src={imageUrl(event.poster_path)}
+                    alt={event.name}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center font-display text-4xl text-ink/20">
+                    {event.name.charAt(0)}
+                  </div>
                 )}
-                <h3 className="font-display text-xl text-sand group-hover:text-gold">
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                {event.category && (
+                  <span className="font-mono text-xs uppercase tracking-[0.15em] text-clay">
+                    {event.category}
+                  </span>
+                )}
+                <h3 className="mt-2 font-display text-xl text-ink">
                   {event.name}
                 </h3>
-                <p className="mt-1 font-body text-sm text-sand/60">
-                  {formatDate(event.start_date)}
-                  {event.venue ? ` \u00b7 ${event.venue}` : ""}
+                <p className="mt-1 font-body text-sm text-ink/50">
+                  {event.start_date?.slice(0, 10) ?? ""}
+                  {event.venue ? ` · ${event.venue}` : ""}
                 </p>
               </div>
-
-              {event.is_booking_enabled ? (
-                <span className="shrink-0 rounded-full bg-clay px-5 py-2 font-body text-sm font-semibold text-sand transition-transform group-hover:scale-105">
-                  Reserve a Spot
-                </span>
-              ) : (
-                <span className="shrink-0 font-body text-sm text-sand/50">
-                  Learn more &rarr;
-                </span>
-              )}
             </Link>
           ))}
         </div>
-
-        <Link
-          href="/events"
-          className="mt-6 block text-center font-body text-sm text-sand/70 underline underline-offset-4 hover:text-gold md:hidden"
-        >
-          View all events
-        </Link>
       </div>
     </section>
   );

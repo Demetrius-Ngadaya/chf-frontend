@@ -15,7 +15,12 @@ type Member = {
   facebook_url: string | null;
   twitter_url: string | null;
   instagram_url: string | null;
+  experience: string | null;
+  professional_affiliations: string | null;
+  research_profile_url: string | null;
+  publications: string | null;
   photo_path: string | null;
+  cv_path: string | null;
 };
 
 export default async function TeamPage() {

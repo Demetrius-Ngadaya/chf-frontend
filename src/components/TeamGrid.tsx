@@ -15,7 +15,12 @@ type Member = {
   facebook_url: string | null;
   twitter_url: string | null;
   instagram_url: string | null;
+  experience: string | null;
+  professional_affiliations: string | null;
+  research_profile_url: string | null;
+  publications: string | null;
   photo_path: string | null;
+  cv_path: string | null;
 };
 
 function photoUrl(path: string) {
@@ -242,6 +247,71 @@ export default function TeamGrid({ members }: { members: Member[] }) {
                   <p className="mt-4 max-w-md text-center font-body text-xs text-sand/50">
                     {selected.qualifications}
                   </p>
+                )}
+
+                {(selected.experience || selected.professional_affiliations) && (
+                  <div className="mt-6 w-full max-w-md space-y-4 border-t border-white/10 pt-6">
+                    {selected.experience && (
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
+                          Experience
+                        </p>
+                        <p className="mt-1 whitespace-pre-line font-body text-sm text-sand/70">
+                          {selected.experience}
+                        </p>
+                      </div>
+                    )}
+                    {selected.professional_affiliations && (
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
+                          Professional Affiliations
+                        </p>
+                        <p className="mt-1 whitespace-pre-line font-body text-sm text-sand/70">
+                          {selected.professional_affiliations}
+                        </p>
+                      </div>
+                    )}
+                    {selected.publications && (
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
+                          Publications
+                        </p>
+                        <ul className="mt-1 list-disc space-y-1 pl-4 font-body text-sm text-sand/70">
+                          {selected.publications
+                            .split("\n")
+                            .filter((line) => line.trim())
+                            .map((line, i) => (
+                              <li key={i}>{line}</li>
+                            ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {(selected.research_profile_url || selected.cv_path) && (
+                  <div className="mt-4 flex flex-wrap justify-center gap-3">
+                    {selected.research_profile_url && (
+                      <a
+                        href={selected.research_profile_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full border border-white/20 px-4 py-1.5 font-body text-xs text-sand hover:bg-white/10"
+                      >
+                        Research Profile
+                      </a>
+                    )}
+                    {selected.cv_path && (
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${selected.cv_path}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full bg-clay px-4 py-1.5 font-body text-xs font-semibold text-sand"
+                      >
+                        Download CV
+                      </a>
+                    )}
+                  </div>
                 )}
 
                 <div className="mt-6">

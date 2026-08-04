@@ -13,6 +13,10 @@ type Partner = {
   contact_person: string | null;
   email: string | null;
   phone: string | null;
+  address: string | null;
+  projects_together: string | null;
+  start_date: string | null;
+  end_date: string | null;
   logo_path: string | null;
 };
 
@@ -125,7 +129,38 @@ export default function PartnerGrid({ partners }: { partners: Partner[] }) {
                   {selected.description}
                 </p>
 
+                {selected.projects_together && (
+                  <div className="mt-6 w-full max-w-sm border-t border-white/10 pt-6">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
+                      Projects Together
+                    </p>
+                    <p className="mt-1 whitespace-pre-line font-body text-sm text-sand/70">
+                      {selected.projects_together}
+                    </p>
+                  </div>
+                )}
+
                 <dl className="mt-6 grid w-full max-w-sm grid-cols-1 gap-3 border-t border-white/10 pt-6 sm:grid-cols-2">
+                  {selected.address && (
+                    <div>
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
+                        Address
+                      </dt>
+                      <dd className="mt-1 font-body text-sm text-sand/80">
+                        {selected.address}
+                      </dd>
+                    </div>
+                  )}
+                  {(selected.start_date || selected.end_date) && (
+                    <div>
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
+                        Partnership
+                      </dt>
+                      <dd className="mt-1 font-body text-sm text-sand/80">
+                        {selected.start_date ?? "?"} - {selected.end_date ?? "present"}
+                      </dd>
+                    </div>
+                  )}
                   {selected.country && (
                     <div>
                       <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-sand/40">
