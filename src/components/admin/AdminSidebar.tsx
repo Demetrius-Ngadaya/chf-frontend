@@ -13,6 +13,7 @@ const NAV_GROUPS = [
   {
     label: "Content",
     items: [
+      { label: "Hero Slides", href: "/admin/hero-slides" },
       { label: "Projects", href: "/admin/projects" },
       { label: "Events", href: "/admin/events" },
       { label: "Blog", href: "/admin/blogs" },
@@ -23,6 +24,8 @@ const NAV_GROUPS = [
       { label: "Gallery", href: "/admin/galleries" },
       { label: "FAQs", href: "/admin/faqs" },
       { label: "Giving Back", href: "/admin/giving-back" },
+      { label: "Resources", href: "/admin/resources" },
+      { label: "Resources", href: "/admin/resources" },
       { label: "Event Registrations", href: "/admin/event-registrations" },
     ],
   },

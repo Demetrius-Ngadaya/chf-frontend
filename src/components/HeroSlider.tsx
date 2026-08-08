@@ -1,40 +1,75 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-type Slide = {
-  id: string;
-  src: string;
-  alt: string;
-  label: string;
+type HeroSlideData = {
+  id: number;
+  title: string;
+  slug: string;
+  image_path: string;
+  thumbnail_path: string | null;
 };
 
-const SLIDES: Slide[] = [
-  {
-    id: "1",
-    src: "/images/hero/slide-1.jpg",
-    alt: "Tanzanian savanna landscape",
-    label: "Reaching every region of Tanzania",
-  },
-  {
-    id: "2",
-    src: "/images/hero/slide-2.jpg",
-    alt: "Mount Kilimanjaro",
-    label: "From the highlands to the coast",
-  },
-  {
-    id: "3",
-    src: "/images/hero/slide-3.jpg",
-    alt: "Zanzibar coastline at sunset",
-    label: "Community by community",
-  },
-];
+const STORAGE_BASE = process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "");
+
+function SlideImage({ slide }: { slide: HeroSlideData }) {
+  const [loaded, setLoaded] = useState(false);
+  const fullUrl = `${STORAGE_BASE}/storage/${slide.image_path}`;
+  const thumbUrl = slide.thumbnail_path
+    ? `${STORAGE_BASE}/storage/${slide.thumbnail_path}`
+    : fullUrl;
+
+  return (
+    <div className="relative h-full w-full">
+      {/* Blurred low-res placeholder, shown instantly */}
+      <img
+        src={thumbUrl}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full scale-105 object-cover blur-lg"
+      />
+      {/* Full image fades in once loaded */}
+      <img
+        src={fullUrl}
+        alt={slide.title}
+        onLoad={() => setLoaded(true)}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {/* Bottom gradient so the title never blocks the picture */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-5 px-6 text-center md:px-10">
+        <p className="font-display text-2xl font-semibold text-sand md:text-4xl">
+          {slide.title}
+        </p>
+        <span className="inline-block rounded-full border border-sand/30 px-6 py-3 font-body text-sm font-semibold text-sand transition-colors hover:border-gold hover:text-gold">
+          View Details
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function HeroSlider() {
+  const [slides, setSlides] = useState<HeroSlideData[]>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/hero-slides`)
+      .then((res) => res.json())
+      .then((data: HeroSlideData[]) => setSlides(data))
+      .catch(() => setSlides([]));
+  }, []);
+
+  if (slides.length === 0) {
+    return <div className="absolute inset-0 z-0 bg-baobab" />;
+  }
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
       <Swiper
@@ -45,27 +80,14 @@ export default function HeroSlider() {
         loop
         className="h-full w-full"
       >
-        {SLIDES.map((slide) => (
+        {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative h-full w-full">
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-              />
-              <div className="absolute bottom-8 right-8">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-sand/70">
-                  {slide.label}
-                </span>
-              </div>
-            </div>
+            <Link href={`/highlights/${slide.slug}`} className="block h-full w-full">
+              <SlideImage slide={slide} />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
-
       <div className="absolute inset-0 bg-gradient-to-t from-baobab-dark/95 via-baobab/60 to-baobab/20" />
     </div>
   );

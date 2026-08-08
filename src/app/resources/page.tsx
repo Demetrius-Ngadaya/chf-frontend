@@ -8,7 +8,10 @@ type Resource = {
   title: string;
   description: string;
   year: number | null;
+  file_path: string;
 };
+
+const STORAGE_BASE = process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "");
 
 export default async function ResourcesPage() {
   const resources = await apiGet<Resource[]>("/resources");
@@ -44,6 +47,14 @@ export default async function ResourcesPage() {
                     {r.title}
                   </h3>
                 </div>
+                <a
+                  href={`${STORAGE_BASE}/storage/${r.file_path}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 rounded-full border border-ink/20 px-5 py-2 font-body text-sm font-semibold text-ink transition-colors hover:border-baobab hover:text-baobab"
+                >
+                  Download
+                </a>
               </div>
             ))}
           </div>

@@ -7,7 +7,9 @@ const COLUMNS = [
       { label: "About Us", href: "/about-us" },
       { label: "Our Team", href: "/team" },
       { label: "Our Projects", href: "/projects" },
+      { label: "Our Partners", href: "/partners" },
       { label: "Achievements", href: "/achievements" },
+      { label: "Giving Back", href: "/giving-back" },
     ],
   },
   {
@@ -17,6 +19,7 @@ const COLUMNS = [
       { label: "Volunteer", href: "/volunteer" },
       { label: "Become a Partner", href: "/become-a-partner" },
       { label: "Events", href: "/events" },
+      { label: "Testimonials", href: "/testimonials" },
     ],
   },
   {
@@ -25,6 +28,8 @@ const COLUMNS = [
       { label: "Blog", href: "/blog" },
       { label: "Research & Publications", href: "/research" },
       { label: "Annual Reports", href: "/resources" },
+      { label: "Photo Gallery", href: "/gallery" },
+      { label: "Video Gallery", href: "/videos" },
       { label: "FAQ", href: "/faq" },
     ],
   },
