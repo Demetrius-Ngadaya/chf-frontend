@@ -13,6 +13,10 @@ type Partner = {
   contact_person: string | null;
   email: string | null;
   phone: string | null;
+  address: string | null;
+  projects_together: string | null;
+  start_date: string | null;
+  end_date: string | null;
   logo_path: string | null;
 };
 

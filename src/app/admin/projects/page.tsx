@@ -20,6 +20,9 @@ type Project = {
   project_manager: string | null;
   is_featured: boolean;
   image_path: string | null;
+  objectives: string | null;
+  achievements: string | null;
+  lessons_learned: string | null;
 };
 
 const EMPTY_FORM = {
@@ -36,6 +39,9 @@ const EMPTY_FORM = {
   project_manager: "",
   is_featured: false,
   image_path: "",
+  objectives: "",
+  achievements: "",
+  lessons_learned: "",
 };
 
 export default function AdminProjectsPage() {
@@ -135,6 +141,9 @@ export default function AdminProjectsPage() {
       project_manager: project.project_manager ?? "",
       is_featured: project.is_featured,
       image_path: project.image_path ?? "",
+      objectives: project.objectives ?? "",
+      achievements: project.achievements ?? "",
+      lessons_learned: project.lessons_learned ?? "",
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -332,6 +341,44 @@ export default function AdminProjectsPage() {
             value={form.project_manager}
             onChange={(e) =>
               setForm({ ...form, project_manager: e.target.value })
+            }
+            className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
+          />
+        </div>
+
+        <div className="mt-4">
+          <label className="font-body text-sm text-ink/70">
+            Objectives (optional)
+          </label>
+          <textarea
+            rows={3}
+            value={form.objectives}
+            onChange={(e) => setForm({ ...form, objectives: e.target.value })}
+            className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
+          />
+        </div>
+
+        <div className="mt-4">
+          <label className="font-body text-sm text-ink/70">
+            Achievements (optional)
+          </label>
+          <textarea
+            rows={3}
+            value={form.achievements}
+            onChange={(e) => setForm({ ...form, achievements: e.target.value })}
+            className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
+          />
+        </div>
+
+        <div className="mt-4">
+          <label className="font-body text-sm text-ink/70">
+            Lessons Learned (optional)
+          </label>
+          <textarea
+            rows={3}
+            value={form.lessons_learned}
+            onChange={(e) =>
+              setForm({ ...form, lessons_learned: e.target.value })
             }
             className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
           />

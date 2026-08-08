@@ -16,6 +16,12 @@ type Volunteer = {
   areas_of_interest: string[] | null;
   availability: string | null;
   experience: string | null;
+  date_of_birth: string | null;
+  motivation_letter: string | null;
+  reference_name: string | null;
+  reference_contact: string | null;
+  photo_path: string | null;
+  cv_path: string | null;
   status: "pending" | "approved" | "rejected";
   created_at: string | null;
 };
@@ -127,36 +133,71 @@ export default function AdminVolunteersPage() {
           {volunteers.map((volunteer) => (
             <div key={volunteer.id} className="p-5">
               <div className="flex items-start justify-between">
-                <div>
-                  <p className="font-body text-sm font-semibold text-ink">
-                    {volunteer.full_name}{" "}
-                    <span
-                      className={`ml-2 rounded-full px-2 py-0.5 font-mono text-[10px] uppercase ${
-                        STATUS_STYLES[volunteer.status]
-                      }`}
-                    >
-                      {volunteer.status}
-                    </span>
-                  </p>
-                  <p className="mt-1 font-body text-sm text-ink/60">
-                    {volunteer.email} - {volunteer.phone}
-                  </p>
-                  <p className="mt-1 font-mono text-xs text-ink/40">
-                    {volunteer.occupation ?? "no occupation"} -{" "}
-                    {volunteer.availability ?? "no availability"}
-                  </p>
-                  {volunteer.skills && volunteer.skills.length > 0 && (
-                    <p className="mt-1 font-body text-xs text-ink/50">
-                      Skills: {volunteer.skills.join(", ")}
-                    </p>
+                <div className="flex gap-4">
+                  {volunteer.photo_path && (
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${volunteer.photo_path}`}
+                      alt=""
+                      className="h-14 w-14 shrink-0 rounded-full object-cover"
+                    />
                   )}
-                  {volunteer.areas_of_interest &&
-                    volunteer.areas_of_interest.length > 0 && (
+                  <div>
+                    <p className="font-body text-sm font-semibold text-ink">
+                      {volunteer.full_name}{" "}
+                      <span
+                        className={`ml-2 rounded-full px-2 py-0.5 font-mono text-[10px] uppercase ${
+                          STATUS_STYLES[volunteer.status]
+                        }`}
+                      >
+                        {volunteer.status}
+                      </span>
+                    </p>
+                    <p className="mt-1 font-body text-sm text-ink/60">
+                      {volunteer.email} - {volunteer.phone}
+                    </p>
+                    <p className="mt-1 font-mono text-xs text-ink/40">
+                      {volunteer.occupation ?? "no occupation"} -{" "}
+                      {volunteer.availability ?? "no availability"}
+                      {volunteer.date_of_birth
+                        ? ` - DOB ${volunteer.date_of_birth}`
+                        : ""}
+                    </p>
+                    {volunteer.skills && volunteer.skills.length > 0 && (
                       <p className="mt-1 font-body text-xs text-ink/50">
-                        Interested in:{" "}
-                        {volunteer.areas_of_interest.join(", ")}
+                        Skills: {volunteer.skills.join(", ")}
                       </p>
                     )}
+                    {volunteer.areas_of_interest &&
+                      volunteer.areas_of_interest.length > 0 && (
+                        <p className="mt-1 font-body text-xs text-ink/50">
+                          Interested in:{" "}
+                          {volunteer.areas_of_interest.join(", ")}
+                        </p>
+                      )}
+                    {volunteer.motivation_letter && (
+                      <p className="mt-2 font-body text-xs italic text-ink/50">
+                        "{volunteer.motivation_letter}"
+                      </p>
+                    )}
+                    {(volunteer.reference_name || volunteer.reference_contact) && (
+                      <p className="mt-1 font-mono text-xs text-ink/40">
+                        Reference: {volunteer.reference_name ?? "?"}
+                        {volunteer.reference_contact
+                          ? ` (${volunteer.reference_contact})`
+                          : ""}
+                      </p>
+                    )}
+                    {volunteer.cv_path && (
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${volunteer.cv_path}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-1 inline-block font-body text-xs text-baobab underline"
+                      >
+                        View CV
+                      </a>
+                    )}
+                  </div>
                 </div>
                 <div className="flex shrink-0 flex-col items-end gap-2">
                   <div className="flex gap-2">

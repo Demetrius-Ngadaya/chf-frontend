@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/Footer";
 import { apiGet } from "@/lib/api";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thechf.or.tz";
 
 type Project = {
   id: number;
@@ -18,6 +21,9 @@ type Project = {
   donor: string | null;
   beneficiaries_count: number | null;
   project_manager: string | null;
+  objectives: string | null;
+  achievements: string | null;
+  lessons_learned: string | null;
 };
 
 const STATUS_LABELS: Record<string, string> = {
@@ -31,6 +37,32 @@ function imageUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${path}`;
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await apiGet<Project>(`/projects/${slug}`);
+  const description = project.description.replace(/<[^>]+>/g, "").slice(0, 160);
+
+  return {
+    title: project.name,
+    description,
+    openGraph: {
+      title: project.name,
+      description,
+      url: `${siteUrl}/projects/${project.slug}`,
+      images: project.image_path ? [imageUrl(project.image_path)] : undefined,
+    },
+    twitter: {
+      title: project.name,
+      description,
+      images: project.image_path ? [imageUrl(project.image_path)] : undefined,
+    },
+  };
+}
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -38,6 +70,19 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
   const project = await apiGet<Project>(`/projects/${slug}`);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.name,
+    description: project.description.replace(/<[^>]+>/g, "").slice(0, 300),
+    url: `${siteUrl}/projects/${project.slug}`,
+    image: project.image_path ? imageUrl(project.image_path) : undefined,
+    publisher: {
+      "@type": "NGO",
+      name: "Caring Heart Foundation",
+    },
+  };
 
   const facts = [
     project.location && { label: "Location", value: project.location },
@@ -56,6 +101,10 @@ export default async function ProjectDetailPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
       <main className="bg-sand">
         {project.image_path ? (
@@ -114,6 +163,35 @@ export default async function ProjectDetailPage({
             className="rich-content mt-8"
             dangerouslySetInnerHTML={{ __html: project.description }}
           />
+
+          {project.objectives && (
+            <div className="mt-8 border-t border-ink/10 pt-8">
+              <h2 className="font-display text-xl text-ink">Objectives</h2>
+              <p className="mt-3 whitespace-pre-line font-body text-sm leading-relaxed text-ink/70">
+                {project.objectives}
+              </p>
+            </div>
+          )}
+
+          {project.achievements && (
+            <div className="mt-8 border-t border-ink/10 pt-8">
+              <h2 className="font-display text-xl text-ink">Achievements</h2>
+              <p className="mt-3 whitespace-pre-line font-body text-sm leading-relaxed text-ink/70">
+                {project.achievements}
+              </p>
+            </div>
+          )}
+
+          {project.lessons_learned && (
+            <div className="mt-8 border-t border-ink/10 pt-8">
+              <h2 className="font-display text-xl text-ink">
+                Lessons Learned
+              </h2>
+              <p className="mt-3 whitespace-pre-line font-body text-sm leading-relaxed text-ink/70">
+                {project.lessons_learned}
+              </p>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

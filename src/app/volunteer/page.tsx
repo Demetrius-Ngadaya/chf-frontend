@@ -26,6 +26,7 @@ export default function VolunteerPage() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [education, setEducation] = useState("");
   const [occupation, setOccupation] = useState("");
   const [skills, setSkills] = useState<string[]>([]);
@@ -33,6 +34,10 @@ export default function VolunteerPage() {
   const [availability, setAvailability] = useState("");
   const [experience, setExperience] = useState("");
   const [motivation, setMotivation] = useState("");
+  const [referenceName, setReferenceName] = useState("");
+  const [referenceContact, setReferenceContact] = useState("");
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [cv, setCv] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -45,26 +50,29 @@ export default function VolunteerPage() {
     setStatus("submitting");
     setMessage(null);
 
+    const formData = new FormData();
+    formData.append("full_name", fullName);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    if (gender) formData.append("gender", gender);
+    if (dateOfBirth) formData.append("date_of_birth", dateOfBirth);
+    if (education) formData.append("education", education);
+    if (occupation) formData.append("occupation", occupation);
+    skills.forEach((s) => formData.append("skills[]", s));
+    interests.forEach((i) => formData.append("areas_of_interest[]", i));
+    if (availability) formData.append("availability", availability);
+    if (experience) formData.append("experience", experience);
+    if (motivation) formData.append("motivation_letter", motivation);
+    if (referenceName) formData.append("reference_name", referenceName);
+    if (referenceContact) formData.append("reference_contact", referenceContact);
+    if (photo) formData.append("photo", photo);
+    if (cv) formData.append("cv", cv);
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/volunteers`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          full_name: fullName,
-          phone,
-          email,
-          gender: gender || null,
-          education: education || null,
-          occupation: occupation || null,
-          skills,
-          areas_of_interest: interests,
-          availability: availability || null,
-          experience: experience || null,
-          motivation_letter: motivation || null,
-        }),
+        headers: { Accept: "application/json" },
+        body: formData,
       });
 
       const data = await res.json();
@@ -112,7 +120,26 @@ export default function VolunteerPage() {
                 </p>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="font-body text-sm text-ink/70">
+                  Photo (optional)
+                </label>
+                {photo && (
+                  <img
+                    src={URL.createObjectURL(photo)}
+                    alt="Preview"
+                    className="mt-2 h-20 w-20 rounded-full object-cover"
+                  />
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setPhoto(e.target.files?.[0] ?? null)}
+                  className="mt-2 block font-body text-sm text-ink/70"
+                />
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-4">
                 <div>
                   <label className="font-body text-sm text-ink/70">
                     Full Name
@@ -165,6 +192,18 @@ export default function VolunteerPage() {
                     className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
                   />
                 </div>
+              </div>
+
+              <div className="mt-4">
+                <label className="font-body text-sm text-ink/70">
+                  Date of Birth (optional)
+                </label>
+                <input
+                  type="date"
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
+                  className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
+                />
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-4">
@@ -256,6 +295,41 @@ export default function VolunteerPage() {
                   onChange={(e) => setExperience(e.target.value)}
                   className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
                 />
+              </div>
+
+              <div className="mt-4">
+                <label className="font-body text-sm text-ink/70">
+                  CV / Resume (optional)
+                </label>
+                <input
+                  type="file"
+                  accept="application/pdf,.doc,.docx"
+                  onChange={(e) => setCv(e.target.files?.[0] ?? null)}
+                  className="mt-1 block font-body text-sm text-ink/70"
+                />
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label className="font-body text-sm text-ink/70">
+                    Reference Name (optional)
+                  </label>
+                  <input
+                    value={referenceName}
+                    onChange={(e) => setReferenceName(e.target.value)}
+                    className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
+                  />
+                </div>
+                <div>
+                  <label className="font-body text-sm text-ink/70">
+                    Reference Contact (optional)
+                  </label>
+                  <input
+                    value={referenceContact}
+                    onChange={(e) => setReferenceContact(e.target.value)}
+                    className="mt-1 w-full rounded border border-ink/15 px-3 py-2 font-body text-sm outline-none focus:border-baobab"
+                  />
+                </div>
               </div>
 
               <div className="mt-4">

@@ -22,6 +22,7 @@ const NAV_GROUPS = [
       { label: "Videos", href: "/admin/videos" },
       { label: "Gallery", href: "/admin/galleries" },
       { label: "FAQs", href: "/admin/faqs" },
+      { label: "Giving Back", href: "/admin/giving-back" },
       { label: "Event Registrations", href: "/admin/event-registrations" },
     ],
   },
@@ -31,6 +32,7 @@ const NAV_GROUPS = [
       { label: "Volunteers", href: "/admin/volunteers" },
       { label: "Partner Applications", href: "/admin/partner-applications" },
       { label: "Contact Messages", href: "/admin/contacts" },
+      { label: "Live Chat", href: "/admin/chat" },
     ],
   },
   {
