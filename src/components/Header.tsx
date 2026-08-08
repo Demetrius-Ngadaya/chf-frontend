@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "About", href: "/about-us" },
@@ -13,8 +14,15 @@ export default function Header() {
     <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between bg-baobab-dark/70 px-6 py-5 backdrop-blur-md md:px-12">
       <Link
         href="/"
-        className="font-display text-lg font-semibold tracking-tight text-sand"
+        className="flex items-center gap-3 font-display text-lg font-semibold tracking-tight text-sand"
       >
+        <Image
+          src="/images/logo.jpg"
+          alt="Caring Heart Foundation logo"
+          width={40}
+          height={40}
+          className="h-10 w-10 rounded-full object-cover"
+        />
         Caring Heart Foundation
       </Link>
 
