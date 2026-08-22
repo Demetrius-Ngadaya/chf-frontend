@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { adminFetch, getToken } from "@/lib/adminApi";
+import AdminPageSkeleton from "@/components/admin/AdminSkeleton";
 
 type Event = {
   id: number;
@@ -201,11 +202,7 @@ export default function AdminEventsPage() {
   }
 
   if (loading) {
-    return (
-      <main className="px-6 py-8 md:px-8">
-        <p className="font-body text-sm text-ink/60">Loading...</p>
-      </main>
-    );
+    return <AdminPageSkeleton />;
   }
 
   return (

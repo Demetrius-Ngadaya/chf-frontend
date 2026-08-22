@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { adminFetch, getToken } from "@/lib/adminApi";
 import RichTextEditor from "@/components/admin/RichTextEditor";
+import AdminPageSkeleton from "@/components/admin/AdminSkeleton";
 
 type Project = {
   id: number;
@@ -155,11 +156,7 @@ export default function AdminProjectsPage() {
   }
 
   if (loading) {
-    return (
-      <main className="px-6 py-8 md:px-8">
-        <p className="font-body text-sm text-ink/60">Loading...</p>
-      </main>
-    );
+    return <AdminPageSkeleton />;
   }
 
   return (

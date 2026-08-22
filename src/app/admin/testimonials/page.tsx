@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { adminFetch, fetchMe, getToken } from "@/lib/adminApi";
+import AdminPageSkeleton from "@/components/admin/AdminSkeleton";
 
 type Testimonial = {
   id: number;
@@ -146,11 +147,7 @@ export default function AdminTestimonialsPage() {
   }
 
   if (checking) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-sand">
-        <p className="font-body text-sm text-ink/60">Loading...</p>
-      </main>
-    );
+    return <AdminPageSkeleton />;
   }
 
   return (

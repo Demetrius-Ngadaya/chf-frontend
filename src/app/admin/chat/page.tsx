@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { adminFetch } from "@/lib/adminApi";
+import AdminPageSkeleton from "@/components/admin/AdminSkeleton";
 
 type Conversation = {
   id: number;
@@ -92,11 +93,7 @@ export default function AdminChatPage() {
   }
 
   if (loading) {
-    return (
-      <main className="px-6 py-8 md:px-8">
-        <p className="font-body text-sm text-ink/60">Loading...</p>
-      </main>
-    );
+    return <AdminPageSkeleton />;
   }
 
   const selected = conversations.find((c) => c.id === selectedId);

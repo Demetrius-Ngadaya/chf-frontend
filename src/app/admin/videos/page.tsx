@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { adminFetch, fetchMe } from "@/lib/adminApi";
+import AdminPageSkeleton from "@/components/admin/AdminSkeleton";
 
 type Video = {
   id: number;
@@ -91,11 +92,7 @@ export default function AdminVideosPage() {
   }
 
   if (checking) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-sand">
-        <p className="font-body text-sm text-ink/60">Loading...</p>
-      </main>
-    );
+    return <AdminPageSkeleton />;
   }
 
   return (
