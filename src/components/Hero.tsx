@@ -1,4 +1,4 @@
-import Header from "./Header";
+import SiteHeader from "./SiteHeader";
 import HeroSlider from "./HeroSlider";
 import PulseDivider from "./PulseDivider";
 
@@ -7,7 +7,7 @@ export default function Hero() {
     <>
       <section className="relative flex min-h-[92vh] flex-col justify-end overflow-hidden bg-baobab px-6 pb-20 pt-32 md:px-12">
         <HeroSlider />
-        <Header />
+        <SiteHeader overlay />
       </section>
       <PulseDivider />
     </>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "About", href: "/about-us" },
@@ -26,17 +27,30 @@ const MORE_LINKS = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
-export default function SiteHeader() {
+export default function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
   return (
-    <header className="relative bg-baobab-dark px-6 py-5 md:px-12">
+    <header
+      className={
+        overlay
+          ? "absolute left-0 right-0 top-0 z-20 bg-baobab-dark/70 px-6 py-5 backdrop-blur-md md:px-12"
+          : "relative bg-baobab-dark px-6 py-5 md:px-12"
+      }
+    >
       <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-tight text-sand"
+          className="flex items-center gap-3 font-display text-lg font-semibold tracking-tight text-sand"
         >
+          <Image
+            src="/images/logo.jpg"
+            alt="Caring Heart Foundation logo"
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full object-cover"
+          />
           Caring Heart Foundation
         </Link>
 

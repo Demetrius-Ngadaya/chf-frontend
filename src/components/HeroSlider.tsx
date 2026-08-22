@@ -25,20 +25,20 @@ function SlideImage({ slide }: { slide: HeroSlideData }) {
     : fullUrl;
 
   return (
-    <div className="relative h-full w-full">
-      {/* Blurred low-res placeholder, shown instantly */}
+    <div className="relative h-full w-full bg-baobab-dark">
+      {/* Blurred low-res placeholder fills the frame so there's never a gap */}
       <img
         src={thumbUrl}
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full scale-105 object-cover blur-lg"
       />
-      {/* Full image fades in once loaded */}
+      {/* Full image shown uncropped, letterboxed against the blurred backdrop */}
       <img
         src={fullUrl}
         alt={slide.title}
         onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+        className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
       />

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/Footer";
+import { RevealGrid, RevealItem } from "@/components/RevealGrid";
+import TiltCard from "@/components/TiltCard";
 import { apiGet } from "@/lib/api";
 
 type Project = {
@@ -46,12 +48,13 @@ export default async function ProjectsPage() {
             a project to see the full story.
           </p>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <RevealGrid className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
+              <RevealItem key={project.id}>
+              <TiltCard className="h-full">
               <Link
-                key={project.id}
                 href={`/projects/${project.slug}`}
-                className="group flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-white transition-shadow hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink/10 bg-white shadow-md transition-shadow duration-300 hover:shadow-2xl"
               >
                 <div className="aspect-video w-full overflow-hidden bg-ink/5">
                   {project.image_path ? (
@@ -92,8 +95,10 @@ export default async function ProjectsPage() {
                   )}
                 </div>
               </Link>
+              </TiltCard>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGrid>
         </div>
       </main>
       <Footer />
