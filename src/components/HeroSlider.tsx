@@ -2,10 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-fade";
 
 type HeroSlideData = {
   id: number;
@@ -17,47 +13,13 @@ type HeroSlideData = {
 
 const STORAGE_BASE = process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "");
 
-function SlideImage({ slide }: { slide: HeroSlideData }) {
-  const [loaded, setLoaded] = useState(false);
-  const fullUrl = `${STORAGE_BASE}/storage/${slide.image_path}`;
-  const thumbUrl = slide.thumbnail_path
-    ? `${STORAGE_BASE}/storage/${slide.thumbnail_path}`
-    : fullUrl;
-
-  return (
-    <div className="relative h-full w-full bg-baobab-dark">
-      {/* Blurred low-res placeholder fills the frame so there's never a gap */}
-      <img
-        src={thumbUrl}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 h-full w-full scale-105 object-cover blur-lg"
-      />
-      {/* Full image shown uncropped, letterboxed against the blurred backdrop */}
-      <img
-        src={fullUrl}
-        alt={slide.title}
-        onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-      />
-      {/* Bottom gradient so the title never blocks the picture */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
-      <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-5 px-6 text-center md:px-10">
-        <p className="font-display text-2xl font-semibold text-sand md:text-4xl">
-          {slide.title}
-        </p>
-        <span className="inline-block rounded-full border border-sand/30 px-6 py-3 font-body text-sm font-semibold text-sand transition-colors hover:border-gold hover:text-gold">
-          View Details
-        </span>
-      </div>
-    </div>
-  );
+function imageUrl(path: string) {
+  return `${STORAGE_BASE}/storage/${path}`;
 }
 
 export default function HeroSlider() {
   const [slides, setSlides] = useState<HeroSlideData[]>([]);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/hero-slides`)
@@ -66,29 +28,63 @@ export default function HeroSlider() {
       .catch(() => setSlides([]));
   }, []);
 
+  useEffect(() => {
+    if (slides.length < 2) return;
+    const timer = setInterval(() => {
+      setCurrent((i) => (i + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
   if (slides.length === 0) {
-    return <div className="absolute inset-0 z-0 bg-baobab" />;
+    return <div className="aspect-[16/9] w-full bg-baobab md:aspect-[21/9]" />;
   }
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
-      <Swiper
-        modules={[Autoplay, EffectFade]}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        loop
-        className="h-full w-full"
-      >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <Link href={`/highlights/${slide.slug}`} className="block h-full w-full">
-              <SlideImage slide={slide} />
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className="absolute inset-0 bg-gradient-to-t from-baobab-dark/95 via-baobab/60 to-baobab/20" />
+    <div className="relative aspect-[16/9] w-full overflow-hidden bg-baobab-dark md:aspect-[21/9]">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className="absolute inset-0 transition-opacity ease-in-out"
+          style={{
+            opacity: index === current ? 1 : 0,
+            transitionDuration: "1200ms",
+            pointerEvents: index === current ? "auto" : "none",
+          }}
+        >
+          <Link href={`/highlights/${slide.slug}`} className="block h-full w-full">
+            <img
+              src={imageUrl(slide.image_path)}
+              alt={slide.title}
+              className="h-full w-full object-contain"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+            <div className="absolute inset-x-0 bottom-6 flex flex-col items-center gap-4 px-6 text-center md:bottom-10 md:px-10">
+              <p className="font-display text-xl font-semibold text-sand md:text-4xl">
+                {slide.title}
+              </p>
+              <span className="inline-block rounded-full border border-sand/30 px-5 py-2.5 font-body text-sm font-semibold text-sand transition-colors hover:border-gold hover:text-gold md:px-6 md:py-3">
+                View Details
+              </span>
+            </div>
+          </Link>
+        </div>
+      ))}
+
+      {slides.length > 1 && (
+        <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrent(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              className={`h-1.5 rounded-full transition-all ${
+                index === current ? "w-6 bg-sand" : "w-1.5 bg-sand/40"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
