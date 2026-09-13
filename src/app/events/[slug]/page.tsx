@@ -153,13 +153,11 @@ export default async function EventDetailPage({
       <SiteHeader />
       <main className="bg-sand">
         {event.poster_path ? (
-          <div className="h-[50vh] w-full overflow-hidden bg-ink/5 md:h-[60vh]">
-            <img
-              src={imageUrl(event.poster_path)}
-              alt={event.name}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          <img
+            src={imageUrl(event.poster_path)}
+            alt={event.name}
+            className="h-auto w-full"
+          />
         ) : (
           <div className="flex h-[30vh] w-full items-center justify-center bg-baobab/10">
             <span className="font-display text-6xl text-baobab/40">

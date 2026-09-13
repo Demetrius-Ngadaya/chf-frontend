@@ -33,11 +33,11 @@ export default async function HighlightDetailPage({
   return (
     <main>
       <SiteHeader />
-      <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden bg-baobab">
+      <section className="relative w-full overflow-hidden bg-baobab">
         <img
           src={`${storageBase}/storage/${slide.image_path}`}
           alt={slide.title}
-          className="h-full w-full object-cover"
+          className="h-auto w-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-baobab-dark/90 via-baobab/30 to-transparent" />
         <div className="absolute inset-x-0 bottom-8 px-6 md:px-12">

@@ -32,13 +32,11 @@ export default async function BlogDetailPage({
       <SiteHeader />
       <main className="bg-sand">
         {post.cover_image_path ? (
-          <div className="h-[45vh] w-full overflow-hidden bg-ink/5 md:h-[55vh]">
-            <img
-              src={imageUrl(post.cover_image_path)}
-              alt={post.title}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          <img
+            src={imageUrl(post.cover_image_path)}
+            alt={post.title}
+            className="h-auto w-full"
+          />
         ) : (
           <div className="flex h-[28vh] w-full items-center justify-center bg-baobab/10">
             <span className="font-display text-6xl text-baobab/40">
