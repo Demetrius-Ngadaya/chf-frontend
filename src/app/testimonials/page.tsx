@@ -1,5 +1,7 @@
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/Footer";
+import { RevealGrid, RevealItem } from "@/components/RevealGrid";
+import TiltCard from "@/components/TiltCard";
 import { apiGet } from "@/lib/api";
 
 type Testimonial = {
@@ -39,11 +41,12 @@ export default async function TestimonialsPage() {
             and the people whose lives have been touched by our work.
           </p>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <RevealGrid className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((t) => (
+              <RevealItem key={t.id}>
+              <TiltCard className="h-full">
               <blockquote
-                key={t.id}
-                className="flex h-full flex-col justify-between rounded-lg border border-ink/10 bg-white p-6"
+                className="flex h-full flex-col justify-between rounded-lg border border-ink/10 bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-2xl"
               >
                 <p className="font-display text-lg leading-snug text-ink">
                   &ldquo;{t.story}&rdquo;
@@ -58,8 +61,10 @@ export default async function TestimonialsPage() {
                   </p>
                 </footer>
               </blockquote>
+              </TiltCard>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGrid>
         </div>
       </main>
       <Footer />

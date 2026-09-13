@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { RevealGrid, RevealItem } from "@/components/RevealGrid";
+import TiltCard from "@/components/TiltCard";
 
 type Member = {
   id: number;
@@ -149,12 +151,13 @@ export default function TeamGrid({ members }: { members: Member[] }) {
 
   return (
     <>
-      <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <RevealGrid className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {members.map((member) => (
+          <RevealItem key={member.id}>
+          <TiltCard>
           <button
-            key={member.id}
             onClick={() => setSelected(member)}
-            className="flex flex-col items-center border-t-2 border-baobab pt-6 text-center transition-transform hover:-translate-y-1"
+            className="flex w-full flex-col items-center rounded-xl border-t-2 border-baobab bg-white p-6 text-center shadow-md transition-shadow duration-300 hover:shadow-xl"
           >
             {member.photo_path ? (
               <img
@@ -180,8 +183,10 @@ export default function TeamGrid({ members }: { members: Member[] }) {
               <SocialIcons member={member} />
             </div>
           </button>
+          </TiltCard>
+          </RevealItem>
         ))}
-      </div>
+      </RevealGrid>
 
       <AnimatePresence>
         {selected && (

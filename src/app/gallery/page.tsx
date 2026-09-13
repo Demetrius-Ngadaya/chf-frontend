@@ -1,6 +1,8 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/Footer";
+import { RevealGrid, RevealItem } from "@/components/RevealGrid";
+import TiltCard from "@/components/TiltCard";
 import { apiGet } from "@/lib/api";
 
 type Gallery = {
@@ -29,12 +31,13 @@ export default async function GalleryPage() {
           <h1 className="font-display text-4xl text-ink md:text-5xl">
             Photo Gallery
           </h1>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <RevealGrid className="mt-12 grid gap-8 md:grid-cols-3">
             {galleries.map((gallery) => (
+              <RevealItem key={gallery.id}>
+              <TiltCard>
               <Link
-                key={gallery.id}
                 href={`/gallery/${gallery.id}`}
-                className="group block overflow-hidden rounded-lg border border-ink/10 bg-white transition-shadow hover:shadow-lg"
+                className="group block overflow-hidden rounded-lg border border-ink/10 bg-white shadow-md transition-shadow duration-300 hover:shadow-2xl"
               >
                 <div className="aspect-video w-full overflow-hidden bg-ink/5">
                   {gallery.cover_image_path ? (
@@ -63,8 +66,10 @@ export default async function GalleryPage() {
                   </p>
                 </div>
               </Link>
+              </TiltCard>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGrid>
         </div>
       </main>
       <Footer />

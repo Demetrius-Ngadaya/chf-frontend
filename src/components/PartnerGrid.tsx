@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { RevealGrid, RevealItem } from "@/components/RevealGrid";
+import TiltCard from "@/components/TiltCard";
 
 type Partner = {
   id: number;
@@ -29,12 +31,13 @@ export default function PartnerGrid({ partners }: { partners: Partner[] }) {
 
   return (
     <>
-      <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <RevealGrid className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {partners.map((partner) => (
+          <RevealItem key={partner.id}>
+          <TiltCard>
           <button
-            key={partner.id}
             onClick={() => setSelected(partner)}
-            className="flex flex-col items-center border-t-2 border-baobab pt-6 text-center transition-transform hover:-translate-y-1"
+            className="flex w-full flex-col items-center rounded-xl border-t-2 border-baobab bg-white p-6 text-center shadow-md transition-shadow duration-300 hover:shadow-xl"
           >
             {partner.logo_path ? (
               <img
@@ -64,8 +67,10 @@ export default function PartnerGrid({ partners }: { partners: Partner[] }) {
               </p>
             )}
           </button>
+          </TiltCard>
+          </RevealItem>
         ))}
-      </div>
+      </RevealGrid>
 
       <AnimatePresence>
         {selected && (
