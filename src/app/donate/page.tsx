@@ -25,6 +25,7 @@ export default function DonatePage() {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
+  const [showOnlineForm, setShowOnlineForm] = useState(false);
 
   const finalAmount = customAmount ? Number(customAmount) : amount;
 
@@ -68,11 +69,86 @@ export default function DonatePage() {
     }
   }
 
+  if (!showOnlineForm) {
+    return (
+      <>
+        <SiteHeader />
+        <main className="bg-sand px-6 py-16 md:px-12">
+          <div className="mx-auto max-w-xl">
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-clay">
+              Support Our Work
+            </p>
+            <h1 className="font-display text-4xl text-ink md:text-5xl">
+              Donate Now
+            </h1>
+            <p className="mt-4 font-body text-ink/70">
+              Thank you for being interested to support us! Please choose a
+              payment method either Bank Transfer or Online Payment :
+            </p>
+
+            <div className="mt-10 rounded-lg border border-ink/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-clay">
+                Bank Transfer
+              </p>
+              <dl className="mt-4 space-y-2 font-body text-sm text-ink/80">
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Account Name</dt>
+                  <dd className="text-right font-semibold">Caring Heart Foundation</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Bank Name</dt>
+                  <dd className="text-right">NMB Bank Plc</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Branch</dt>
+                  <dd className="text-right">Ifakara Branch</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Account Number</dt>
+                  <dd className="text-right font-semibold">21610097376</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">SWIFT/BIC</dt>
+                  <dd className="text-right">NMIBTZTZ</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Bank Address</dt>
+                  <dd className="text-right">
+                    NMB House, Ohio Street, P.O. Box 9213, Dar es Salaam,
+                    Tanzania
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Reference</dt>
+                  <dd className="text-right">CHF DONATION</dd>
+                </div>
+              </dl>
+            </div>
+
+            <button
+              onClick={() => setShowOnlineForm(true)}
+              className="mt-6 w-full rounded-full bg-clay px-6 py-3 font-body text-sm font-semibold text-sand transition-transform hover:scale-[1.02]"
+            >
+              Online Payment
+            </button>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <SiteHeader />
       <main className="bg-sand px-6 py-16 md:px-12">
         <div className="mx-auto max-w-xl">
+          <button
+            onClick={() => setShowOnlineForm(false)}
+            className="mb-4 font-body text-sm text-ink/50 hover:text-baobab"
+          >
+            &larr; Back
+          </button>
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-clay">
             Support Our Work
           </p>

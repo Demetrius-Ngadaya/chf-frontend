@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { apiGet } from "@/lib/api";
 
 type AboutContent = {
+  intro: string;
   mission: string;
   vision: string;
   objectives: string[];
@@ -16,7 +17,7 @@ type AboutPage = {
 
 export default async function AboutUsPage() {
   const page = await apiGet<AboutPage>("/pages/about-us");
-  const { mission, vision, objectives } = page.content;
+  const { intro, mission, vision, objectives } = page.content;
 
   return (
     <>
@@ -31,13 +32,7 @@ export default async function AboutUsPage() {
           </h1>
 
           <p className="mt-8 font-body text-lg leading-relaxed text-ink/80">
-            Caring Heart Foundation (CHF) is a registered, non-profit,
-            non-governmental organization committed to promoting quality
-            health, social welfare, and sustainable community development
-            across Tanzania. Established to respond to pressing health
-            challenges and social needs affecting vulnerable populations, CHF
-            works through practical, compassionate, and inclusive
-            interventions.
+            {intro}
           </p>
 
           <div className="mt-14 grid gap-10 border-t border-ink/10 pt-10 md:grid-cols-2">

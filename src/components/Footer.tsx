@@ -40,13 +40,20 @@ const COLUMNS = [
       { label: "Contact Us", href: "/contact-us" },
     ],
   },
+  {
+    title: "Staff",
+    links: [
+      { label: "Login", href: "/admin/login" },
+      { label: "Staff Mail", href: "https://server14.tanzaniaservers.com/roundcube/" },
+    ],
+  },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-baobab-dark px-6 pb-10 pt-16 md:px-12">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 md:grid-cols-5">
+        <div className="grid gap-10 md:grid-cols-6">
           <div className="md:col-span-2">
             <p className="font-display text-lg font-semibold text-sand">
               Caring Heart Foundation
@@ -70,6 +77,8 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="font-body text-sm text-sand/70 transition-colors hover:text-gold"
                     >
                       {link.label}

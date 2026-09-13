@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type Message = {
   id: number;
@@ -12,6 +13,7 @@ type Message = {
 const STORAGE_KEY = "chf_chat_conversation_id";
 
 export default function ChatWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -136,6 +138,8 @@ export default function ChatWidget() {
     setMessages([]);
     openWidget();
   }
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>

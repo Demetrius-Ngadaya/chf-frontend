@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
+import ContactWidget from "@/components/ContactWidget";
+import DonateWidget from "@/components/DonateWidget";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -86,6 +88,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         {children}
+        <DonateWidget />
+        <ContactWidget />
         <ChatWidget />
       </body>
     </html>

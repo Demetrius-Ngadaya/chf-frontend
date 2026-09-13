@@ -73,7 +73,13 @@ export default function ContactPage() {
                 <span className="block font-mono text-xs uppercase tracking-[0.15em] text-ink/40">
                   Email
                 </span>
-                info@caringheartfoundation.or.tz
+                info@thechf.or.tz
+              </p>
+              <p>
+                <span className="block font-mono text-xs uppercase tracking-[0.15em] text-ink/40">
+                  Phone number
+                </span>
+                TZ +255 683 199 460
               </p>
               <p>
                 <span className="block font-mono text-xs uppercase tracking-[0.15em] text-ink/40">
