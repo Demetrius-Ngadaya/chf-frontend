@@ -125,6 +125,45 @@ export default function DonatePage() {
               </dl>
             </div>
 
+            <div className="mt-6 rounded-lg border border-ink/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-clay">
+                Bank Transfer (Alternative)
+              </p>
+              <dl className="mt-4 space-y-2 font-body text-sm text-ink/80">
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Account Name</dt>
+                  <dd className="text-right font-semibold">Caring Heart Foundation</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Bank Name</dt>
+                  <dd className="text-right">CRDB Bank Plc</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Branch</dt>
+                  <dd className="text-right">Ifakara Branch</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Account Number</dt>
+                  <dd className="text-right font-semibold">10204286267</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">SWIFT/BIC</dt>
+                  <dd className="text-right">CORUTZTZXXX</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Bank Address</dt>
+                  <dd className="text-right">
+                    CRDB Bank Head Office, Ali Hassan Mwinyi Road, P.O. Box
+                    268, Dar es Salaam, Tanzania
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-ink/50">Reference</dt>
+                  <dd className="text-right">CHF DONATION</dd>
+                </div>
+              </dl>
+            </div>
+
             <button
               onClick={() => setShowOnlineForm(true)}
               className="mt-6 w-full rounded-full bg-clay px-6 py-3 font-body text-sm font-semibold text-sand transition-transform hover:scale-[1.02]"
