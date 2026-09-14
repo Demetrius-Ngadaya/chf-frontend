@@ -1,4 +1,5 @@
 import Link from "next/link";
+import FooterSocialLinks from "@/components/FooterSocialLinks";
 
 const COLUMNS = [
   {
@@ -65,6 +66,9 @@ export default function Footer() {
             <p className="mt-4 font-mono text-xs text-sand/40">
               Reg. No. 00NGO/R/7471
             </p>
+            <div className="mt-5">
+              <FooterSocialLinks />
+            </div>
           </div>
 
           {COLUMNS.map((column) => (

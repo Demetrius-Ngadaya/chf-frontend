@@ -28,6 +28,8 @@ const NAV_GROUPS = [
       { label: "Achievements", href: "/admin/achievements" },
       { label: "Statistics", href: "/admin/statistics" },
       { label: "About Us Page", href: "/admin/about-us" },
+      { label: "Terms & Conditions", href: "/admin/terms" },
+      { label: "Social Links", href: "/admin/social-links" },
       { label: "Event Registrations", href: "/admin/event-registrations" },
     ],
   },
