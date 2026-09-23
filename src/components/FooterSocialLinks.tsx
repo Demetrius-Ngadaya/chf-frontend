@@ -1,4 +1,6 @@
-import { apiGet } from "@/lib/api";
+"use client";
+
+import { useEffect, useState } from "react";
 
 type SocialLink = {
   id: number;
@@ -44,13 +46,34 @@ const ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-export default async function FooterSocialLinks() {
-  let links: SocialLink[] = [];
-  try {
-    links = await apiGet<SocialLink[]>("/social-links");
-  } catch {
-    return null;
-  }
+export default function FooterSocialLinks() {
+  const [links, setLinks] = useState<SocialLink[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const base = process.env.NEXT_PUBLIC_API_URL ?? "";
+    fetch(`${base}/social-links`, {
+      headers: { Accept: "application/json" },
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (cancelled || !json) return;
+        const data: SocialLink[] = Array.isArray(json)
+          ? json
+          : Array.isArray(json.data)
+            ? json.data
+            : [];
+        setLinks(data);
+      })
+      .catch(() => {
+        /* silently ignore — footer still renders */
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   if (links.length === 0) return null;
 
