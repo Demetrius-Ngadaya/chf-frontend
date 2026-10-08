@@ -81,7 +81,9 @@ export async function adminFetch<T>(
   const res = await fetch(`${API_URL}/admin${path}`, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
+      ...(options.body instanceof FormData
+        ? {}
+        : { "Content-Type": "application/json" }),
       "Accept": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,

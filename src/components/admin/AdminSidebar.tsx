@@ -25,6 +25,7 @@ const NAV_GROUPS = [
       { label: "FAQs", href: "/admin/faqs" },
       { label: "Giving Back", href: "/admin/giving-back" },
       { label: "Resources", href: "/admin/resources" },
+      { label: "Research & Publications", href: "/admin/publications" },
       { label: "Achievements", href: "/admin/achievements" },
       { label: "Statistics", href: "/admin/statistics" },
       { label: "About Us Page", href: "/admin/about-us" },

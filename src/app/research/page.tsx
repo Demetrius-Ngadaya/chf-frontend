@@ -10,6 +10,7 @@ type Publication = {
   authors: string[] | null;
   category: string | null;
   published_on: string | null;
+  file_path: string | null;
 };
 
 export default async function PublicationsPage() {
@@ -41,6 +42,16 @@ export default async function PublicationsPage() {
                 <p className="mt-2 font-body text-sm text-ink/70">
                   {p.summary}
                 </p>
+                {p.file_path && (
+                  <a
+                    href={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${p.file_path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-block rounded-full bg-baobab px-4 py-1.5 font-body text-xs font-semibold text-sand"
+                  >
+                    Download
+                  </a>
+                )}
                 {p.authors && p.authors.length > 0 && (
                   <p className="mt-1 font-body text-xs text-ink/50">
                     {p.authors.join(", ")}
