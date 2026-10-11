@@ -92,7 +92,7 @@ export default function AdminAboutUsPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-8 max-w-3xl rounded-lg border border-ink/10 bg-white p-6"
+        className="mt-8 max-w-3xl rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-6"
       >
         {error && (
           <p className="mb-4 rounded bg-clay/10 px-3 py-2 font-body text-sm text-clay">
@@ -177,7 +177,7 @@ export default function AdminAboutUsPage() {
         <button
           type="submit"
           disabled={saving}
-          className="mt-6 rounded-full bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
+          className="mt-6 rounded-lg bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
         >
           {saving ? "Saving..." : "Save Changes"}
         </button>

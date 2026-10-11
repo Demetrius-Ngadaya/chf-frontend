@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Space_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
 import ContactWidget from "@/components/ContactWidget";
 import DonateWidget from "@/components/DonateWidget";
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
-});
+const fraunces = Inter({ subsets: ["latin"], variable: "--font-display" });
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
 });
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-mono",
-});
+const spaceMono = Inter({ subsets: ["latin"], variable: "--font-mono" });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thechf.or.tz";
 

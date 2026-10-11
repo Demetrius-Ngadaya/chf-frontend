@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import FooterSocialLinks from "@/components/FooterSocialLinks";
 
 const COLUMNS = [
@@ -56,9 +57,19 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 md:grid-cols-6">
           <div className="md:col-span-2">
-            <p className="font-display text-lg font-semibold text-sand">
-              Caring Heart Foundation
-            </p>
+            <div className="flex items-center gap-2.5">
+              <Image
+                src="/images/logo.jpg"
+                alt="Caring Heart Foundation logo"
+                width={45}
+                height={45}
+                className="h-[45px] w-[45px] rounded-xl border-2 border-clay object-cover"
+              />
+              <div>
+                <p className="text-[0.82rem] font-bold tracking-wide text-sand">CARING HEART FOUNDATION</p>
+                <p className="mt-1 text-[0.6rem] tracking-[0.12em] text-gold">IMPROVED LIFE &amp; SOCIAL INCLUSION</p>
+              </div>
+            </div>
             <p className="mt-3 max-w-xs font-body text-sm text-sand/60">
               A registered Tanzanian NGO promoting quality health, social
               welfare, and sustainable community development.

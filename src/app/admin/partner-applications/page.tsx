@@ -118,7 +118,7 @@ export default function AdminPartnerApplicationsPage() {
           )}
         </div>
 
-        <div className="mt-6 divide-y divide-ink/10 rounded-lg border border-ink/10 bg-white">
+        <div className="mt-6 divide-y divide-ink/10 rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
           {applications.length === 0 && (
             <p className="p-6 font-body text-sm text-ink/50">
               No partner applications found.
@@ -169,7 +169,7 @@ export default function AdminPartnerApplicationsPage() {
                         onClick={() =>
                           handleStatusChange(application.id, "approved")
                         }
-                        className="rounded-full bg-baobab px-3 py-1 font-body text-xs font-semibold text-sand"
+                        className="rounded-lg bg-baobab px-3 py-1 font-body text-xs font-semibold text-sand"
                       >
                         Approve
                       </button>

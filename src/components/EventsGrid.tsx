@@ -74,7 +74,7 @@ export default function EventsGrid({ events }: { events: Event[] }) {
               <TiltCard className="h-full">
                 <Link
                   href={`/events/${event.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink/10 bg-white shadow-md transition-shadow duration-300 hover:shadow-2xl"
+                  className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] shadow-md transition-shadow duration-300 hover:shadow-2xl"
                 >
                   <div className="aspect-video w-full overflow-hidden bg-ink/5">
                     {event.poster_path ? (
@@ -114,7 +114,7 @@ export default function EventsGrid({ events }: { events: Event[] }) {
           ))}
         </RevealGrid>
       ) : (
-        <RevealGrid className="mt-6 divide-y divide-ink/10 rounded-lg border border-ink/10 bg-white">
+        <RevealGrid className="mt-6 divide-y divide-ink/10 rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
           {events.map((event) => (
             <RevealItem key={event.id}>
               <Link

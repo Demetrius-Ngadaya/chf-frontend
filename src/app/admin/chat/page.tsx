@@ -106,7 +106,7 @@ export default function AdminChatPage() {
       <h1 className="mt-1 font-display text-2xl text-ink">Live Chat</h1>
 
       <div className="mt-6 flex gap-6" style={{ height: "70vh" }}>
-        <div className="w-80 shrink-0 overflow-y-auto rounded-lg border border-ink/10 bg-white">
+        <div className="w-80 shrink-0 overflow-y-auto rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
           {conversations.length === 0 && (
             <p className="p-6 font-body text-sm text-ink/50">
               No conversations yet.
@@ -135,7 +135,7 @@ export default function AdminChatPage() {
           ))}
         </div>
 
-        <div className="flex flex-1 flex-col rounded-lg border border-ink/10 bg-white">
+        <div className="flex flex-1 flex-col rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
           {!selected ? (
             <div className="flex flex-1 items-center justify-center">
               <p className="font-body text-sm text-ink/40">
@@ -209,7 +209,7 @@ export default function AdminChatPage() {
                 <button
                   type="submit"
                   disabled={sending || !reply.trim()}
-                  className="rounded-full bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
+                  className="rounded-lg bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
                 >
                   {sending ? "Sending..." : "Send"}
                 </button>

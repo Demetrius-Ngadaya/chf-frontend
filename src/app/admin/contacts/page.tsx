@@ -80,7 +80,7 @@ export default function AdminContactsPage() {
           Show unread only
         </label>
 
-        <div className="mt-6 divide-y divide-ink/10 rounded-lg border border-ink/10 bg-white">
+        <div className="mt-6 divide-y divide-ink/10 rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
           {messages.length === 0 && (
             <p className="p-6 font-body text-sm text-ink/50">
               No messages found.
