@@ -42,7 +42,7 @@ export default function TestimonialsCarousel({
     >
       {testimonials.map((t) => (
         <SwiperSlide key={t.id}>
-          <blockquote className="flex h-full flex-col justify-between rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]/60 p-8">
+          <blockquote className="flex h-full flex-col justify-between rounded-lg border border-ink/10 bg-white/60 p-8">
             <p className="font-display text-lg leading-snug text-ink">
               &ldquo;{t.story}&rdquo;
             </p>

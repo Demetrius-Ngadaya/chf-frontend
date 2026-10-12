@@ -47,7 +47,7 @@ export default async function PublicationsPage() {
                     href={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${p.file_path}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-3 inline-block rounded-lg bg-baobab px-4 py-1.5 font-body text-xs font-semibold text-sand"
+                    className="mt-3 inline-block rounded-full bg-baobab px-4 py-1.5 font-body text-xs font-semibold text-sand"
                   >
                     Download
                   </a>

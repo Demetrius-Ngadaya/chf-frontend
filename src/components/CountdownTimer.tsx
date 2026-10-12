@@ -37,7 +37,7 @@ export default function CountdownTimer({
   ];
 
   return (
-    <div className="rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-5">
+    <div className="rounded-lg border border-ink/10 bg-white p-5">
       <p className="font-mono text-xs uppercase tracking-[0.15em] text-clay">
         {label}
       </p>

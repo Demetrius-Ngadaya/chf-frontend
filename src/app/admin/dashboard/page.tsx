@@ -96,7 +96,7 @@ export default function AdminDashboardPage() {
               <Link
                 key={card.href}
                 href={card.href}
-                className="rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-5 transition-shadow hover:shadow-md"
+                className="rounded-lg border border-ink/10 bg-white p-5 transition-shadow hover:shadow-md"
               >
                 <p className="font-display text-3xl text-ink">
                   {card.value}
@@ -116,7 +116,7 @@ export default function AdminDashboardPage() {
               <Link
                 key={card.href}
                 href={card.href}
-                className="rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-5 transition-shadow hover:shadow-md"
+                className="rounded-lg border border-ink/10 bg-white p-5 transition-shadow hover:shadow-md"
               >
                 <div className="flex items-baseline gap-2">
                   <p className="font-display text-3xl text-ink">

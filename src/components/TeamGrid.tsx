@@ -311,7 +311,7 @@ export default function TeamGrid({ members }: { members: Member[] }) {
                         href={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${selected.cv_path}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="rounded-lg bg-clay px-4 py-1.5 font-body text-xs font-semibold text-sand"
+                        className="rounded-full bg-clay px-4 py-1.5 font-body text-xs font-semibold text-sand"
                       >
                         Download CV
                       </a>

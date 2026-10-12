@@ -114,7 +114,7 @@ export default function EventRegisterForm({
     <>
       <button
         onClick={() => setOpen(true)}
-        className="mt-8 rounded-lg bg-baobab px-6 py-3 font-body text-sm font-semibold text-sand transition-transform hover:scale-105"
+        className="mt-8 rounded-full bg-baobab px-6 py-3 font-body text-sm font-semibold text-sand transition-transform hover:scale-105"
       >
         Reserve a Spot
       </button>
@@ -158,7 +158,7 @@ export default function EventRegisterForm({
                     <p className="font-body text-sm text-baobab">{feedback}</p>
                     <button
                       onClick={closeAndReset}
-                      className="mt-5 rounded-lg bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand"
+                      className="mt-5 rounded-full bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand"
                     >
                       Done
                     </button>
@@ -248,7 +248,7 @@ export default function EventRegisterForm({
                     <button
                       type="submit"
                       disabled={status === "submitting"}
-                      className="mt-5 w-full rounded-lg bg-baobab px-6 py-3 font-body text-sm font-semibold text-sand disabled:opacity-50"
+                      className="mt-5 w-full rounded-full bg-baobab px-6 py-3 font-body text-sm font-semibold text-sand disabled:opacity-50"
                     >
                       {status === "submitting"
                         ? "Submitting..."

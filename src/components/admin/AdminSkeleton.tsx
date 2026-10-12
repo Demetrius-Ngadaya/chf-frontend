@@ -8,7 +8,7 @@ export default function AdminPageSkeleton() {
       <SkeletonBlock className="h-3 w-24" />
       <SkeletonBlock className="mt-2 h-7 w-56" />
 
-      <div className="mt-8 max-w-3xl rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-6">
+      <div className="mt-8 max-w-3xl rounded-lg border border-ink/10 bg-white p-6">
         <SkeletonBlock className="h-4 w-40" />
         <div className="mt-4 space-y-4">
           <SkeletonBlock className="h-9 w-full" />
@@ -19,7 +19,7 @@ export default function AdminPageSkeleton() {
         <SkeletonBlock className="mt-5 h-9 w-32" />
       </div>
 
-      <div className="mt-8 max-w-3xl divide-y divide-ink/10 rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
+      <div className="mt-8 max-w-3xl divide-y divide-ink/10 rounded-lg border border-ink/10 bg-white">
         {[1, 2, 3].map((i) => (
           <div key={i} className="flex items-center justify-between p-5">
             <div className="flex-1 space-y-2">

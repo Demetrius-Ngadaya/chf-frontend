@@ -223,7 +223,7 @@ export default function PartnerGrid({ partners }: { partners: Partner[] }) {
                     href={selected.website}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-6 rounded-lg bg-clay px-6 py-2 font-body text-sm font-semibold text-sand transition-transform hover:scale-105"
+                    className="mt-6 rounded-full bg-clay px-6 py-2 font-body text-sm font-semibold text-sand transition-transform hover:scale-105"
                   >
                     Visit Website
                   </a>

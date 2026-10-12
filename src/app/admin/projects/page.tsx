@@ -170,7 +170,7 @@ export default function AdminProjectsPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-8 max-w-3xl rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-6"
+        className="mt-8 max-w-3xl rounded-lg border border-ink/10 bg-white p-6"
       >
         <h2 className="font-body text-sm font-semibold text-ink">
           {editingId ? "Edit Project" : "Add New Project"}
@@ -396,7 +396,7 @@ export default function AdminProjectsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="rounded-lg bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
+            className="rounded-full bg-baobab px-5 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
           >
             {saving
               ? "Saving..."
@@ -419,7 +419,7 @@ export default function AdminProjectsPage() {
         </div>
       </form>
 
-      <div className="mt-8 max-w-3xl divide-y divide-ink/10 rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308]">
+      <div className="mt-8 max-w-3xl divide-y divide-ink/10 rounded-lg border border-ink/10 bg-white">
         {projects.length === 0 && (
           <p className="p-6 font-body text-sm text-ink/50">
             No projects yet. Add your first one above.

@@ -220,7 +220,7 @@ export default function ChatWidget() {
             <button
               type="submit"
               disabled={sending || !input.trim()}
-              className="rounded-lg bg-baobab px-4 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
+              className="rounded-full bg-baobab px-4 py-2 font-body text-sm font-semibold text-sand disabled:opacity-50"
             >
               Send
             </button>

@@ -46,7 +46,7 @@ export default async function TestimonialsPage() {
               <RevealItem key={t.id}>
               <TiltCard className="h-full">
               <blockquote
-                className="flex h-full flex-col justify-between rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] p-6 shadow-md transition-shadow duration-300 hover:shadow-2xl"
+                className="flex h-full flex-col justify-between rounded-lg border border-ink/10 bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-2xl"
               >
                 <p className="font-display text-lg leading-snug text-ink">
                   &ldquo;{t.story}&rdquo;

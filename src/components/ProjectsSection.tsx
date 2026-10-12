@@ -52,7 +52,7 @@ export default async function ProjectsSection() {
             <Link
               key={project.id}
               href={`/projects/${project.slug}`}
-              className="group flex flex-col overflow-hidden rounded-[14px] border border-[#e2e8f0] bg-white shadow-[0_3px_10px_#152d4308] transition-shadow hover:shadow-lg"
+              className="group flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-white transition-shadow hover:shadow-lg"
             >
               <div className="aspect-video w-full overflow-hidden bg-ink/5">
                 {project.image_path ? (
