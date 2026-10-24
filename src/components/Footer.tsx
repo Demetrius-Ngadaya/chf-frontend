@@ -53,30 +53,37 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-baobab-dark px-6 pb-10 pt-16 md:px-12">
+    <footer className="bg-baobab px-6 pb-6 pt-14 text-[#cbd5e1] md:px-12">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 md:grid-cols-6">
-          <div className="md:col-span-2">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_repeat(5,1fr)]">
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5">
               <Image
                 src="/images/logo.jpg"
                 alt="Caring Heart Foundation logo"
                 width={45}
                 height={45}
-                className="h-[45px] w-[45px] rounded-xl border-2 border-clay object-cover"
+                className="h-[45px] w-[45px] shrink-0 rounded-xl border-2 border-clay object-cover"
               />
               <div>
-                <p className="text-[0.82rem] font-bold tracking-wide text-sand">CARING HEART FOUNDATION</p>
+                <p className="text-[0.82rem] font-bold tracking-wide text-white">CARING HEART FOUNDATION</p>
                 <p className="mt-1 text-[0.6rem] tracking-[0.12em] text-gold">IMPROVED LIFE &amp; SOCIAL INCLUSION</p>
               </div>
             </div>
-            <p className="mt-3 max-w-xs font-body text-sm text-sand/60">
+            <p className="mt-3 max-w-xs font-body text-sm text-[#cbd5e1]">
               A registered Tanzanian NGO promoting quality health, social
               welfare, and sustainable community development.
             </p>
-            <p className="mt-4 font-mono text-xs text-sand/40">
-              Reg. No. 00NGO/R/7471
-            </p>
+            <address className="mt-4 space-y-1 font-body text-xs not-italic leading-[1.9] text-[#cbd5e1]">
+              <p>Reg. No. 00NGO/R/7471 · Registered 24 September 2024</p>
+              <p>+255 683 199 460 · +255 652 007 437</p>
+              <p>P.O. Box 73, Ifakara, Tanzania</p>
+              <p>
+                <a href="mailto:info@thechf.or.tz" className="hover:text-gold">
+                  info@thechf.or.tz
+                </a>
+              </p>
+            </address>
             <div className="mt-5">
               <FooterSocialLinks />
             </div>
@@ -84,7 +91,7 @@ export default function Footer() {
 
           {COLUMNS.map((column) => (
             <div key={column.title}>
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-gold">
+              <p className="mb-4 font-body text-base font-semibold text-white">
                 {column.title}
               </p>
               <ul className="space-y-2">
@@ -94,7 +101,7 @@ export default function Footer() {
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="font-body text-sm text-sand/70 transition-colors hover:text-gold"
+                      className="font-body text-sm text-[#cbd5e1] transition-colors hover:text-gold"
                     >
                       {link.label}
                     </Link>
@@ -105,7 +112,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 border-t border-sand/10 pt-6 text-center font-body text-xs text-sand/40">
+        <div className="mt-14 border-t border-white/15 pt-5 text-center font-body text-xs text-[#cbd5e1]">
           © {new Date().getFullYear()} Caring Heart Foundation. All rights
           reserved.
         </div>

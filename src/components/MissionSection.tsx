@@ -1,6 +1,8 @@
 import { apiGet } from "@/lib/api";
+import { Card, CardText, CardTitle, IconBox, Section, SectionHead } from "@/components/design";
 
 type AboutContent = {
+  intro?: string;
   mission: string;
   vision: string;
   objectives: string[];
@@ -12,47 +14,40 @@ type AboutPage = {
   content: AboutContent;
 };
 
+const FOCUS_ICONS = ["✦", "✓", "⊕", "☼"] as const;
+const TONES = ["rose", "teal", "gold"] as const;
+
 export default async function MissionSection() {
   const page = await apiGet<AboutPage>("/pages/about-us");
-  const { mission, vision, objectives } = page.content;
+  const { intro, mission, vision, objectives } = page.content;
 
   return (
-    <section className="bg-baobab-dark px-6 py-20 md:px-12">
-      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2">
-        <div>
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-gold">
-            Our Mission
-          </p>
-          <p className="font-display text-2xl leading-snug text-sand md:text-3xl">
-            {mission}
-          </p>
-        </div>
-
-        <div>
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-gold">
-            Our Vision
-          </p>
-          <p className="font-display text-2xl leading-snug text-sand md:text-3xl">
-            {vision}
-          </p>
-        </div>
+    <Section id="about">
+      <SectionHead
+        eyebrow="Who we are"
+        title="A community-centered approach to health"
+        intro={intro}
+        action={{ href: "/about-us", label: "Read our story" }}
+      />
+      <div className="grid gap-[1.6rem] sm:grid-cols-2">
+        <Card>
+          <IconBox tone="teal">◎</IconBox>
+          <CardTitle>Our Vision</CardTitle>
+          <CardText>{vision}</CardText>
+        </Card>
+        <Card>
+          <IconBox tone="rose">♥</IconBox>
+          <CardTitle>Our Mission</CardTitle>
+          <CardText>{mission}</CardText>
+        </Card>
+        {objectives.map((objective, index) => (
+          <Card key={index}>
+            <IconBox tone={TONES[index % TONES.length]}>{FOCUS_ICONS[index % FOCUS_ICONS.length]}</IconBox>
+            <CardTitle>What we focus on</CardTitle>
+            <CardText>{objective}</CardText>
+          </Card>
+        ))}
       </div>
-
-      <div className="mx-auto mt-16 max-w-6xl">
-        <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-gold">
-          What We Focus On
-        </p>
-        <ul className="grid gap-6 md:grid-cols-2">
-          {objectives.map((objective, index) => (
-            <li
-              key={index}
-              className="flex gap-4 border-l-2 border-gold/40 pl-4 font-body text-sand/80"
-            >
-              {objective}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    </Section>
   );
 }

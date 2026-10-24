@@ -1,4 +1,5 @@
 import { apiGet } from "@/lib/api";
+import { storageUrl } from "@/lib/media";
 
 type Partner = {
   id: number;
@@ -7,20 +8,16 @@ type Partner = {
   logo_path: string | null;
 };
 
-function logoUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "")}/storage/${path}`;
-}
-
 export default async function PartnersSection() {
   const partners = await apiGet<Partner[]>("/partners?limit=25");
-  if (partners.length === 0) {
-    return null;
-  }
+  if (partners.length === 0) return null;
+
   const track = [...partners, ...partners];
+
   return (
-    <section className="border-y border-ink/10 bg-sand py-12">
-      <p className="mb-8 text-center font-mono text-xs uppercase tracking-[0.2em] text-ink/50">
-        Trusted By Our Partners
+    <section className="border-y border-line bg-soft py-12">
+      <p className="mb-8 text-center font-body text-[0.72rem] font-extrabold uppercase tracking-[2px] text-clay">
+        Trusted by our partners
       </p>
       <div className="marquee-viewport">
         <div className="marquee-track">
@@ -30,19 +27,18 @@ export default async function PartnersSection() {
               className="mx-8 flex items-center gap-3 whitespace-nowrap"
             >
               {partner.logo_path ? (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={logoUrl(partner.logo_path)}
+                  src={storageUrl(partner.logo_path)}
                   alt={partner.name}
                   className="h-9 w-9 shrink-0 rounded-full bg-white object-cover"
                 />
               ) : (
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-baobab/10 font-display text-sm text-baobab">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-rose font-body text-sm font-bold text-clay">
                   {partner.name.charAt(0)}
                 </span>
               )}
-              <span className="font-display text-lg text-ink/40">
-                {partner.name}
-              </span>
+              <span className="font-body text-base font-bold text-baobab/50">{partner.name}</span>
             </span>
           ))}
         </div>

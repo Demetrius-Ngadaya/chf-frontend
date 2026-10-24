@@ -1,18 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  /* CHF palette: navy + red (matches the design reference) */
-  --color-baobab: #152d43;       /* navy */
-  --color-baobab-dark: #102438;  /* deep navy (footer, dark sections) */
-  --color-gold: #ff9ba2;         /* soft red accent on dark backgrounds */
-  --color-clay: #c62936;         /* brand red */
-  --color-sand: #f5f7fa;         /* page background */
-  --color-ink: #243447;          /* body text */
+  /* CHF palette: rose + teal + gold on warm cream (design reference v3) */
+  --color-baobab: #102a43;       /* deep navy: footer, dark bands, headings */
+  --color-baobab-dark: #102a43;  /* footer */
+  --color-gold: #f4a261;         /* warm accent, hover on dark */
+  --color-clay: #e63946;         /* brand rose */
+  --color-red-dark: #c1121f;     /* rose, darker (gradients, hover) */
+  --color-teal: #0f766e;         /* secondary brand */
+  --color-sand: #fff8f0;         /* page background (cream) */
+  --color-ink: #1f2937;          /* body text */
+  --color-line: #f1e4d8;         /* borders, dividers */
+  --color-muted: #6b7280;        /* secondary text */
+  --color-soft: #ffffff;         /* alternate section background */
+  --color-rose: #ffe5e5;         /* rose icon tint */
+  --color-teal-soft: #d9f2ef;    /* teal icon tint */
+  --color-teal-tag: #e7f6f4;     /* tags, hero wash */
+  --color-gold-soft: #ffeedd;    /* gold icon tint */
 
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
+  --radius-card: 20px;
+  --radius-panel: 24px;
+  --shadow-card: 0 10px 30px rgba(17, 24, 39, 0.08);
+  --shadow-pop: 0 10px 30px rgba(17, 24, 39, 0.14);
+  --shadow-cta: 0 8px 20px rgba(230, 57, 70, 0.3);
+
+  --font-display: var(--font-merriweather), Georgia, serif;
+  --font-body: var(--font-poppins), system-ui, sans-serif;
+  --font-mono: var(--font-poppins), system-ui, sans-serif;
 }
+
+/* Swiper (testimonials) picks up the brand red */
+:root, .swiper { --swiper-theme-color: #e63946; }
 
 html, body {
   overflow-x: clip; /* clip (not hidden) so sticky header keeps working */
@@ -43,9 +61,9 @@ html, body {
   }
 }
 
-.rich-content h1 { font-family: inherit; font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #152d43; }
-.rich-content h2 { font-family: inherit; font-size: 1.5rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #152d43; }
-.rich-content h3 { font-family: inherit; font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #152d43; }
+.rich-content h1 { font-family: inherit; font-size: 1.75rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #102a43; }
+.rich-content h2 { font-family: inherit; font-size: 1.5rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #102a43; }
+.rich-content h3 { font-family: inherit; font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #102a43; }
 .rich-content { overflow-wrap: break-word; word-break: break-word; }
 .rich-content p { margin-bottom: 1rem; line-height: 1.75; overflow-wrap: break-word; word-break: break-word; }
 .rich-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
@@ -53,12 +71,12 @@ html, body {
 .rich-content li { margin-bottom: 0.4rem; line-height: 1.6; }
 .rich-content strong { font-weight: 700; }
 .rich-content em { font-style: italic; }
-.rich-content a { color: #c62936; text-decoration: underline; }
-.rich-content blockquote { border-left: 3px solid #c62936; padding-left: 1rem; margin: 1rem 0; font-style: italic; color: #24344799; }
+.rich-content a { color: #e63946; text-decoration: underline; }
+.rich-content blockquote { border-left: 3px solid #e63946; padding-left: 1rem; margin: 1rem 0; font-style: italic; color: #1f293799; }
 
 @layer components {
   /* headings: bold, tight, navy-friendly (reference design) */
-  .font-display { font-weight: 700; letter-spacing: -0.02em; }
+  .font-display { font-weight: 700; letter-spacing: 0; line-height: 1.2; }
   /* eyebrow labels */
   .font-mono { font-weight: 700; }
 }

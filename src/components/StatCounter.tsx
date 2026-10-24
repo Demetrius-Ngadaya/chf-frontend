@@ -1,6 +1,7 @@
 "use client";
 
 import CountUp from "react-countup";
+import { Metric } from "@/components/design";
 
 type Props = {
   value: number;
@@ -10,18 +11,15 @@ type Props = {
 
 export default function StatCounter({ value, suffix, label }: Props) {
   return (
-    <div className="text-center">
-      <div className="font-mono text-3xl font-bold text-baobab md:text-4xl">
-        <CountUp
-          end={value}
-          duration={2.5}
-          separator=","
-          enableScrollSpy
-          scrollSpyOnce
-        />
-        {suffix}
-      </div>
-      <p className="mt-2 font-body text-sm text-ink/70">{label}</p>
-    </div>
+    <Metric
+      dark
+      label={label}
+      value={
+        <>
+          <CountUp end={value} duration={2.5} separator="," enableScrollSpy scrollSpyOnce />
+          {suffix}
+        </>
+      }
+    />
   );
 }

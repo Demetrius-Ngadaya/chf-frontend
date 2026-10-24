@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Merriweather, Poppins } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
 import ContactWidget from "@/components/ContactWidget";
 import DonateWidget from "@/components/DonateWidget";
 
-const fraunces = Inter({ subsets: ["latin"], variable: "--font-display" });
-const inter = Inter({
+// Poppins for UI/body, Merriweather for display headings (see --font-* in globals.css).
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
+  display: "swap",
 });
-const spaceMono = Inter({ subsets: ["latin"], variable: "--font-mono" });
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-merriweather",
+  display: "swap",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thechf.or.tz";
 
@@ -73,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable} antialiased`}
+        className={`${poppins.variable} ${merriweather.variable} font-body antialiased`}
       >
         <script
           type="application/ld+json"
